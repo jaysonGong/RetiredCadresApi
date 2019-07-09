@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ntyl.retiresCadres.dao.RetiredCadresDao">
+    <resultMap id="BaseResultMap" type="com.ntyl.retiresCadres.model.RetiredCadres">
+        <result column="identityid" property="identityId" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="birthday" property="birthday" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="VARCHAR"/>
+        <result column="nativePlace" property="nativePlace" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        identityid,name,age,birthday,gender,nativePlace
+    </sql>
+
+    <select id="getModelById" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from retiredcadres
+        where identityid = #{identityId}
+    </select>
+
+    <insert id="addRetiredCadres" parameterType="com.ntyl.retiresCadres.model.RetiredCadres">
+        insert into retiredcadres
+        (<include refid="Base_Column_List"/>)
+        values(#{identityId},#{name},#{age},#{birthday},#{gender},#{nativePlace})
+    </insert>
+</mapper>
